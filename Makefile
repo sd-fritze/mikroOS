@@ -5,7 +5,7 @@ CC = gcc
 LD = ld
 
 ASFLAGS = -m32
-CFLAGS = -m32 -Wall -g -fno-stack-protector -nostdinc
+CFLAGS = -m32 -Wall -g -fno-stack-protector -nostdinc -std=c99
 LDFLAGS = -melf_i386 -Tkernel.ld
 
 kernel: $(OBJS)
@@ -18,7 +18,7 @@ kernel: $(OBJS)
 	$(CC) $(ASFLAGS) -c -o $@ $^
 
 clean:
-	rm $(OBJS)
+	rm $(OBJS) kernel
 
 .PHONY: clean
 
