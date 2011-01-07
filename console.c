@@ -20,7 +20,7 @@ void kputs( char* string )
   int i;
   for (i = 0; string[i] != '\0'; i++) 
   {
-    if ( ( string[i] == '\n' ) | ( col == S_COLS ) )
+    if ( ( string[i] == '\n' ) || ( col == S_COLS ) )
     {
       row++;
       if ( row == S_ROWS )
@@ -43,13 +43,14 @@ void kscroll()
 {
   int scroll_line = 0;
   int i = 0;
-  for(scroll_line;scroll_line<=S_ROWS;scroll_line++)
+  for(scroll_line;scroll_line<S_ROWS;scroll_line++)
   {
     if (scroll_line != S_ROWS-1)
     {
-      for(i; i < 2 * S_COLS; i++)
+      for(i; i < S_COLS; i++)
       {
-        video[scroll_line * S_COLS * 2 + i] = video[(scroll_line +1 ) * S_COLS * 2 + i];
+        video[(scroll_line * S_COLS  + i)*2] = video[((scroll_line +1 ) * S_COLS + i ) * 2];
+	video[(scroll_line * S_COLS  + i)*2+1] = video[((scroll_line +1 ) * S_COLS + i ) * 2+1];
       }
     }
     else
